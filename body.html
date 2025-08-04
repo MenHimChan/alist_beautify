@@ -1,0 +1,45 @@
+<!-- 加载指示器（页面隐藏时显示，提示用户正在加载） -->
+<div class="bg-loader"></div>
+
+<script src="https://cdn.jsdelivr.net/gh/TheSmallHanCat/Better_Alist@main/jq.js"></script>
+<div class="st-Container">
+    <a style='display:none' class="st-Menu closed" id="st-Menu" href="javascript:void(0);"></a>
+</div>
+<div class="sw-Hennnyano" id="sw-Hennnyano">
+    <div class="layer body w100" data-depth="0.1"></div>
+    <div class="layer eyes w100" data-depth="0.2"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/TheSmallHanCat/Better_Alist@main/js/lib.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/TheSmallHanCat/Better_Alist@main/js/parallax.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/TheSmallHanCat/Better_Alist@main/js/app.bundle.js"></script>
+<div id="jsi-flying-fish-container" class="fish-container"></div>
+<script src='https://cdn.jsdelivr.net/gh/TheSmallHanCat/Better_Alist@main/fish.js'></script>
+
+<!-- 3. 控制页面显示时机的JS -->
+<script>
+  // 等待背景图加载完成
+  const img = new Image();
+  img.src = "https://www.dmoe.cc/random.php"; // 与背景图URL一致
+  
+  // 图片加载完成：显示页面 + 隐藏加载指示器
+  img.onload = function() {
+    document.documentElement.classList.add('bg-loaded'); // 显示页面
+    document.querySelector('.bg-loader').style.display = 'none';
+  };
+  
+  // 图片加载失败的降级处理（避免页面一直隐藏）
+  img.onerror = function() {
+    // 用备用图替代，并显示页面
+    document.body.style.backgroundImage = "url('https://picsum.photos/1920/1080') !important";
+    document.documentElement.classList.add('bg-loaded');
+    document.querySelector('.bg-loader').style.display = 'none';
+  };
+  
+  // 超时保护：3秒后无论是否加载完成都显示页面（防止卡死）
+  setTimeout(function() {
+    if (!document.documentElement.classList.contains('bg-loaded')) {
+      document.documentElement.classList.add('bg-loaded');
+      document.querySelector('.bg-loader').style.display = 'none';
+    }
+  }, 3000);
+</script>
