@@ -1,0 +1,47 @@
+<!-- 1. 预加载背景图 -->
+<link rel="preload" href="https://www.dmoe.cc/random.php" as="image" fetchpriority="high">
+
+<!-- 2. 核心样式：初始隐藏页面，加载完成后显示 -->
+<link href="https://cdn.jsdelivr.net/gh/TheSmallHanCat/Better_Alist@main/alist.css" rel="stylesheet" type="text/css">
+<style>
+  /* 关键：初始隐藏整个页面，避免白色背景暴露 */
+  html {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-out; /* 显示时的淡入动画 */
+  }
+
+  /* 背景图加载完成后，通过JS添加类名显示页面 */
+  html.bg-loaded {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* 背景图样式（确保覆盖原样式） */
+  body {
+    background-image: url('https://www.dmoe.cc/random.php') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    margin: 0; /* 去除默认边距导致的白边 */
+    padding: 0;
+  }
+
+  /* 可选：加载指示器（在页面隐藏时显示） */
+  .bg-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ddd;
+    border-top-color: #666;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 9999;
+  }
+  @keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+</style>
