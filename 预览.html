@@ -1,0 +1,15 @@
+这是来解决pdf浏览失败的代码：
+
+在预览那个iframe替换成：
+{
+    "doc,docx,xls,xlsx,ppt,pptx": {
+        "Microsoft":"https://view.officeapps.live.com/op/view.aspx?src=$e_url",
+        "Google":"https://docs.google.com/gview?url=$e_url&embedded=true"
+    },
+    "pdf": {
+        "alicdn.js":"http://g.alicdn.com/teambition/pdfviewer/1.2.0/index.html?file=$e_url"
+    },
+    "epub": {
+        "EPUB.js":"/static/epub.js/viewer.html?url=$e_url"
+    }
+} 
